@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SearchParamDisplay from './SearchParamDisplay'
 
 export const revalidate = 60
 
@@ -16,6 +17,7 @@ export default function Page() {
         The third click should NOT trigger an RSC fetch (the data was already fetched),
         but it does.
       </p>
+      <SearchParamDisplay />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 20 }}>
         {items.map((item, i) => (
           <Link
