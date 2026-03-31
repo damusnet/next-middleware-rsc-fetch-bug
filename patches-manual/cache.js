@@ -289,7 +289,7 @@ function pingInvalidationListeners(nextUrl, tree) {
     }
 }
 function readRouteCacheEntry(now, key) {
-    if (key.search && key.search.includes('item')) console.log('[rsc-debug] readRouteCacheEntry search:', key.search, 'pathname:', key.pathname);
+    if (key.search && key.search.includes('item')) console.log('[rsc-debug] readRouteCacheEntry search:', key.search, 'pathname:', key.pathname, 'nextUrl:', key.nextUrl);
     const varyPath = (0, _varypath.getRouteVaryPath)(key.pathname, key.search, key.nextUrl);
     const isRevalidation = false;
     const existingEntry = (0, _cachemap.getFromCacheMap)(now, getCurrentRouteCacheVersion(), routeCacheMap, varyPath, isRevalidation);
@@ -413,7 +413,7 @@ function deprecated_requestOptimisticRouteCacheEntry(now, requestedUrl, nextUrl)
     const optimisticUrl = new URL(routeWithNoSearchParams.canonicalUrl, location.origin);
     optimisticUrl.search = optimisticCanonicalSearch;
     const optimisticCanonicalUrl = (0, _createhreffromurl.createHrefFromUrl)(optimisticUrl);
-    console.log('[rsc-debug] optimistic renderedSearch:', optimisticRenderedSearch, 'base renderedSearch:', routeWithNoSearchParams.renderedSearch);
+    console.log('[rsc-debug] optimistic renderedSearch:', optimisticRenderedSearch, 'base renderedSearch:', routeWithNoSearchParams.renderedSearch, 'base nextUrl:', routeWithNoSearchParams.canonicalUrl);
     const optimisticRouteTree = deprecated_createOptimisticRouteTree(routeWithNoSearchParams.tree, optimisticRenderedSearch);
     const optimisticMetadataTree = deprecated_createOptimisticRouteTree(routeWithNoSearchParams.metadata, optimisticRenderedSearch);
     // Clone the base route tree, and override the relevant fields with our
