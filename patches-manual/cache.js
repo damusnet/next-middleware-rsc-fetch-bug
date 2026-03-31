@@ -411,6 +411,7 @@ function deprecated_requestOptimisticRouteCacheEntry(now, requestedUrl, nextUrl)
     const optimisticUrl = new URL(routeWithNoSearchParams.canonicalUrl, location.origin);
     optimisticUrl.search = optimisticCanonicalSearch;
     const optimisticCanonicalUrl = (0, _createhreffromurl.createHrefFromUrl)(optimisticUrl);
+    console.log('[rsc-debug] optimistic renderedSearch:', optimisticRenderedSearch, 'base renderedSearch:', routeWithNoSearchParams.renderedSearch);
     const optimisticRouteTree = deprecated_createOptimisticRouteTree(routeWithNoSearchParams.tree, optimisticRenderedSearch);
     const optimisticMetadataTree = deprecated_createOptimisticRouteTree(routeWithNoSearchParams.metadata, optimisticRenderedSearch);
     // Clone the base route tree, and override the relevant fields with our
