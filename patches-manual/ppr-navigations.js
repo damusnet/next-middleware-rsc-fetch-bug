@@ -788,7 +788,7 @@ function createCacheNodeForSegment(now, tree, seedRsc, metadataVaryPath, seedHea
     // Skip BFCache writes for optimistic navigations since they are transient
     // and will be replaced by the canonical navigation.
     if (freshness !== 5) {
-        if (tree.isPage) { var vp = tree.varyPath, parts = []; while(vp) { parts.push((vp.id || '_') + ':' + (typeof vp.value === 'object' ? 'Fallback' : String(vp.value).substring(0,80))); vp = vp.parent; } console.log('[rsc-debug] writeBFCache page:', parts.join(' > ')); }
+        if (tree.isPage) { var vp = tree.varyPath, parts = []; while(vp) { parts.push((vp.id || '_') + ':' + (typeof vp.value === 'object' ? 'Fallback' : String(vp.value).substring(0,80))); vp = vp.parent; } console.log('[rsc-debug] writeBFCache page:', parts.join(' > '), 'staleAt:', dynamicStaleAt, 'freshness:', freshness); }
         (0, _bfcache.writeToBFCache)(now, tree.varyPath, rsc, prefetchRsc, head, prefetchHead, dynamicStaleAt);
         if (isPage && metadataVaryPath !== null) {
             (0, _bfcache.writeHeadToBFCache)(now, metadataVaryPath, head, prefetchHead, dynamicStaleAt);
