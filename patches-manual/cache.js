@@ -289,10 +289,12 @@ function pingInvalidationListeners(nextUrl, tree) {
     }
 }
 function readRouteCacheEntry(now, key) {
+    if (key.search && key.search.includes('item')) console.log('[rsc-debug] readRouteCacheEntry search:', key.search, 'pathname:', key.pathname);
     const varyPath = (0, _varypath.getRouteVaryPath)(key.pathname, key.search, key.nextUrl);
     const isRevalidation = false;
     const existingEntry = (0, _cachemap.getFromCacheMap)(now, getCurrentRouteCacheVersion(), routeCacheMap, varyPath, isRevalidation);
-    if (existingEntry !== null) {
+    
+    if (key.search && key.search.includes('item')) console.log('[rsc-debug] readRouteCacheEntry result:', existingEntry !== null ? 'HIT status=' + existingEntry.status : 'MISS');if (existingEntry !== null) {
         return existingEntry;
     }
     // No cache hit. Attempt to construct from template using the new
