@@ -83,6 +83,7 @@ function updateCacheNodeOnNavigation(navigatedAt, oldUrl, oldCacheNode, oldRoute
     const oldSegment = oldRouterState[0];
     const newSegment = createSegmentFromRouteTree(newRouteTree);
     if (!(0, _matchsegments.matchSegment)(newSegment, oldSegment)) {
+        if (typeof newSegment === 'string' && newSegment.startsWith('__PAGE__')) console.log('[rsc-debug] PAGE DIVERGED old:', JSON.stringify(oldSegment), 'new:', JSON.stringify(newSegment));
         // This segment does not match the previous route. We're now entering the
         // new part of the target route. Switch to the "create" path.
         if (// Check if the route tree changed before we reached a layout. (The
@@ -121,7 +122,9 @@ function updateCacheNodeOnNavigation(navigatedAt, oldUrl, oldCacheNode, oldRoute
         }
         return createCacheNodeOnNavigation(navigatedAt, newRouteTree, newMetadataVaryPath, freshness, seedData, seedHead, seedDynamicStaleAt, parentNeedsDynamicRequest, accumulation);
     }
-    const newSlots = newRouteTree.slots;
+    
+    if (typeof newSegment === 'string' && newSegment.startsWith('__PAGE__')) console.log('[rsc-debug] PAGE MATCHED old:', JSON.stringify(oldSegment), 'new:', JSON.stringify(newSegment));
+const newSlots = newRouteTree.slots;
     const oldRouterStateChildren = oldRouterState[1];
     const seedDataChildren = seedData !== null ? seedData[1] : null;
     // We're currently traversing the part of the tree that was also part of
