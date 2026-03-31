@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "cp patches-manual/ppr-navigations.js node_modules/next/dist/client/components/router-reducer/ppr-navigations.js && cp patches-manual/cache.js node_modules/next/dist/client/components/segment-cache/cache.js"
   },
   "dependencies": {
     "next": "16.2.1",
