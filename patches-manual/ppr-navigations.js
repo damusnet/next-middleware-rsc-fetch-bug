@@ -1142,7 +1142,8 @@ function writeDynamicDataIntoNavigationTask(task, serverRouteTree, dynamicData, 
                 } else {
                     const taskSegment = taskChild.route[0];
                     const serverSegment = createSegmentFromRouteTree(serverRouteTreeChild);
-                    if ((0, _matchsegments.matchSegment)(serverSegment, taskSegment) && dynamicDataChild !== null && dynamicDataChild !== undefined) {
+                    var segmentsMatch = (0, _matchsegments.matchSegment)(serverSegment, taskSegment) || (typeof serverSegment === 'string' && typeof taskSegment === 'string' && serverSegment.startsWith('__PAGE__') && taskSegment.startsWith('__PAGE__'));
+                    if (segmentsMatch && dynamicDataChild !== null && dynamicDataChild !== undefined) {
                         // Found a match for this task. Keep traversing down the task tree.
                         const childDidReceiveUnknownParallelRoute = writeDynamicDataIntoNavigationTask(taskChild, serverRouteTreeChild, dynamicDataChild, dynamicHead, dynamicStaleAt, debugInfo);
                         if (childDidReceiveUnknownParallelRoute) {
